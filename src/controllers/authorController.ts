@@ -11,6 +11,7 @@ class AuthorController {
     } catch (e) {
       res.status(500).json({ error: e });
     }
+    console.log("hesds");
   }
   async apiCreateAuthor(req: Request, res: Response, next: NextFunction) {
     try {
