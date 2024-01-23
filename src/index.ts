@@ -2,7 +2,7 @@ import express, { Express, Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import mongoose, { MiddlewareOptions } from "mongoose";
 import bodyParser from "body-parser";
-import { authorRouter } from "./routes/index";
+import router from "./routes/router";
 
 class BookStoreApplication {
   private app: Application;
@@ -25,7 +25,7 @@ class BookStoreApplication {
   }
   private initializeRouters() {
     // routers
-    this.app.use(authorRouter);
+    this.app.use(router);
     this.app.get("/", (_req: Request, res: Response) => {
       res.send("Welcome to book store application");
     });
