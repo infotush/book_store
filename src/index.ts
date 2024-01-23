@@ -1,35 +1,46 @@
-import express, { Express, Request, Response, Application } from 'express';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import { authorRouter } from './routes/authorRoute';
-import Author from './schemas/authorSchema';
-import bodyParser from 'body-parser';
+import express, { Express, Request, Response, Application } from "express";
+import dotenv from "dotenv";
+import mongoose, { MiddlewareOptions } from "mongoose";
+import { authorRouter } from "./routes/authorRoute";
+import Author from "./schemas/authorSchema";
+import bodyParser from "body-parser";
+import exp from "constants";
 
+class BookStoreApplication {
+  private app: Application;
+  private port: number | string;
+  constructor() {
+    this.app = express();
+    this.port = process.env.PORT || 8000;
+    this.initializeMiddlewares();
+    this.initializeDatabase();
+    this.initializeRouters();
+  }
+  private initializeMiddlewares() {
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+  }
+  private initializeDatabase() {
+    mongoose
+      .connect(`${process.env.DB_URL}`)
+      .then(() => console.log("database is connected!"));
+  }
+  private initializeRouters() {
+    // routers
+    this.app.use(authorRouter);
+    this.app.get("/", (_req: Request, res: Response) => {
+      res.send("Welcome to book store application");
+    });
+  }
+  public start() {
+    this.app.listen(this.port, () => {
+      console.log(`Server is running at http://localhost:${this.port}`);
+    });
+  }
+}
 
-
-//For env File 
+//For env File
 dotenv.config();
 
-mongoose.connect(`${process.env.DB_URL}`)
-    .then(() => console.log('database is connected!'));
-
-const app: Application = express();
-const port = process.env.PORT || 8000;
-
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-// routers
-app.use(authorRouter)
-
-
-app.get('/', (_req: Request, res: Response) => {
-    res.send('Welcome to Express & TypeScript Server');
-});
-
-
-
-app.listen(port, () => {
-    console.log(`Server is Fire at http://localhost:${port}`);
-});
+const server = new BookStoreApplication();
+server.start();
