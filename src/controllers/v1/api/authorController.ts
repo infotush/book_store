@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-import Author from "../schemas/authorSchema";
-import authorService from "../services/authorService";
+import authorService from "../../../services/v1/api/authorService";
 import { Request, Response, NextFunction } from "express";
 
 class AuthorController {
@@ -23,6 +21,22 @@ class AuthorController {
   async apiGetAuthorById(req: Request, res: Response, next: NextFunction) {
     try {
       const author = await authorService.getAuthorById(req.params.id);
+      res.status(200).json(author);
+    } catch (e) {
+      res.status(500).json({ error: `${e}` });
+    }
+  }
+  async apiDeleteAuthor(req: Request, res: Response, next: NextFunction) {
+    try {
+      const author = await authorService.deleteAuthor(req.params.id);
+      res.status(200).json(author);
+    } catch (e) {
+      res.status(500).json({ error: `${e}` });
+    }
+  }
+  async apiUpdateAuthor(req: Request, res: Response, next: NextFunction) {
+    try {
+      const author = await authorService.updateAuthor(req.params.id, req.body);
       res.status(200).json(author);
     } catch (e) {
       res.status(500).json({ error: `${e}` });

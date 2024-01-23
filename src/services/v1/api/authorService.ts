@@ -1,4 +1,4 @@
-import Author, { IAuthor } from "../schemas/authorSchema";
+import Author, { IAuthor } from "../../../schemas/authorSchema";
 
 class AuthorService {
   async getAuthors() {
@@ -16,6 +16,7 @@ class AuthorService {
         fullName,
         bio,
         books,
+        createdAt: new Date(),
       };
       const author = await new Author(newAuthor).save();
       return author;
@@ -29,6 +30,26 @@ class AuthorService {
       return author;
     } catch (e) {
       throw new Error(`Author cannot be retrieved ${e}`);
+    }
+  }
+  async deleteAuthor(id: string) {
+    try {
+      return await Author.deleteOne({ _id: id });
+    } catch (e) {
+      throw new Error(`Author cannot be deleted ${e}`);
+    }
+  }
+  async updateAuthor(id: string, data: IAuthor) {
+    try {
+      const { fullName, bio, books } = data;
+
+      const author = await Author.updateOne(
+        { _id: id },
+        { fullName, bio, books, updatedAt: new Date() }
+      );
+      return author;
+    } catch (e) {
+      throw new Error(`Author cannot be updated ${e}`);
     }
   }
 }
