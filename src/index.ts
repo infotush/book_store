@@ -1,10 +1,8 @@
 import express, { Express, Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import mongoose, { MiddlewareOptions } from "mongoose";
-import { authorRouter } from "./routes/authorRoute";
-import Author from "./schemas/authorSchema";
 import bodyParser from "body-parser";
-import exp from "constants";
+import { authorRouter } from "./routes/index";
 
 class BookStoreApplication {
   private app: Application;
