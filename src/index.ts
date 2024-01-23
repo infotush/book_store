@@ -3,12 +3,19 @@ import dotenv from "dotenv";
 import mongoose, { MiddlewareOptions } from "mongoose";
 import bodyParser from "body-parser";
 import router from "./routes/router";
+import winston from "winston";
 
-class BookStoreApplication {
+export default class BookStoreApplication {
   private app: Application;
   private port: number | string;
+  public logger: winston.Logger;
   constructor() {
     this.app = express();
+    this.logger = winston.createLogger({
+      level: "info",
+      format: winston.format.json(),
+      transports: [new winston.transports.Console()],
+    });
     this.port = process.env.PORT || 8000;
     this.initializeMiddlewares();
     this.initializeDatabase();
@@ -21,8 +28,9 @@ class BookStoreApplication {
   private initializeDatabase() {
     mongoose
       .connect(`${process.env.DB_URL}`)
-      .then(() => console.log("database is connected!"));
+      .then(() => this.logger.info("database is connected!"));
   }
+
   private initializeRouters() {
     // routers
     this.app.use(router);
@@ -30,9 +38,10 @@ class BookStoreApplication {
       res.send("Welcome to book store application");
     });
   }
+
   public start() {
     this.app.listen(this.port, () => {
-      console.log(`Server is running at http://localhost:${this.port}`);
+      this.logger.info(`Server is running at http://localhost:${this.port}`);
     });
   }
 }
