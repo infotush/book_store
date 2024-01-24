@@ -1,11 +1,10 @@
 import { logger } from "../../../index";
-import WinstonLogger from "../../../logger";
 
 import authorService from "../../../services/v1/api/authorService";
 import { Request, Response, NextFunction } from "express";
 
 class AuthorController {
-  async apiGetAllAuthors(req: Request, res: Response, _next: NextFunction) {
+  async apiGetAllAuthors(_req: Request, res: Response, _next: NextFunction) {
     try {
       logger.info("Fetching Authors");
       const authors = await authorService.getAuthors();
@@ -15,7 +14,7 @@ class AuthorController {
       res.status(500).json({ error: e });
     }
   }
-  async apiCreateAuthor(req: Request, res: Response, next: NextFunction) {
+  async apiCreateAuthor(req: Request, res: Response, _next: NextFunction) {
     try {
       const author = await authorService.createAuthor(req.body);
       res.status(200).json({ author, status: "Success" });
@@ -23,7 +22,7 @@ class AuthorController {
       res.status(500).json({ error: e });
     }
   }
-  async apiGetAuthorById(req: Request, res: Response, next: NextFunction) {
+  async apiGetAuthorById(req: Request, res: Response, _next: NextFunction) {
     try {
       const author = await authorService.getAuthorById(req.params.id);
       res.status(200).json({ author, status: "Success" });

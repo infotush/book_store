@@ -1,6 +1,6 @@
-import express, { Express, Request, Response, Application } from "express";
+import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
-import mongoose, { MiddlewareOptions } from "mongoose";
+import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import router from "./routes/router";
 import winston from "winston";
