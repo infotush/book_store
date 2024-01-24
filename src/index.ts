@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import router from "./routes/router";
 import winston from "winston";
 
-export default class BookStoreApplication {
+class BookStoreApplication {
   private app: Application;
   private port: number | string;
   public logger: winston.Logger;
@@ -50,4 +50,5 @@ export default class BookStoreApplication {
 dotenv.config();
 
 const server = new BookStoreApplication();
+export const logger = new BookStoreApplication().logger;
 server.start();
