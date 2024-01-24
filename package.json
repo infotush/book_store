@@ -9,7 +9,6 @@
     "swagger": "tsoa spec",
     "build": "tsc",
     "start-dist": "node dist/index.js",
-    "dev-1": "yarn run build && ts-node-dev -x --respawn src/index.ts",
     "dev": "yarn run build && yarn run swagger && ts-node-dev --respawn src/index.ts"
   },
   "keywords": [],
