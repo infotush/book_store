@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import router from "./routes/router";
 import winston from "winston";
 import WinstonLogger from "./logger";
+import swaggerUi from "swagger-ui-express";
 
 class BookStoreApplication {
   private app: Application;
@@ -21,6 +22,16 @@ class BookStoreApplication {
   private initializeMiddlewares() {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(express.static("public"));
+    this.app.use(
+      "/docs",
+      swaggerUi.serve,
+      swaggerUi.setup(undefined, {
+        swaggerOptions: {
+          url: "/swagger.json",
+        },
+      })
+    );
   }
   private initializeDatabase() {
     mongoose
