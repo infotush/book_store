@@ -1,4 +1,6 @@
 import { logger } from "../../../index";
+import WinstonLogger from "../../../logger";
+
 import authorService from "../../../services/v1/api/authorService";
 import { Request, Response, NextFunction } from "express";
 

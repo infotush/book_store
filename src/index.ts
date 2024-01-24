@@ -4,6 +4,7 @@ import mongoose, { MiddlewareOptions } from "mongoose";
 import bodyParser from "body-parser";
 import router from "./routes/router";
 import winston from "winston";
+import WinstonLogger from "./logger";
 
 class BookStoreApplication {
   private app: Application;
@@ -11,11 +12,7 @@ class BookStoreApplication {
   public logger: winston.Logger;
   constructor() {
     this.app = express();
-    this.logger = winston.createLogger({
-      level: "info",
-      format: winston.format.json(),
-      transports: [new winston.transports.Console()],
-    });
+    this.logger = new WinstonLogger().getLogger();
     this.port = process.env.PORT || 8000;
     this.initializeMiddlewares();
     this.initializeDatabase();
