@@ -13,10 +13,10 @@ class AuthorRouter {
      *  get:
      *     tags:
      *     - Authors
-     *     description: Responds if the app is up and running
+     *     description: Get all the authors details
      *     responses:
      *       200:
-     *         description: App is up and running
+     *         description: Successful in retrieving Authors
      */
     this.router.get("/authors", authorController.apiGetAllAuthors);
     this.router.post("/authors", authorController.apiCreateAuthor);
