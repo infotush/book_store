@@ -1,5 +1,5 @@
 import { Router } from "express";
-import AuthorRouter from "./v1/api/authorRouter";
+import authorRouter from "./v1/api/authorRouter";
 
 class BookStoreRouter {
   public router: Router = Router();
@@ -7,7 +7,7 @@ class BookStoreRouter {
     this.initializeAuthorRouter();
   }
   private initializeAuthorRouter(): void {
-    this.router.use("/v1/api", AuthorRouter);
+    this.router.use("/v1/api", authorRouter);
   }
 }
 
