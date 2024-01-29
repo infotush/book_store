@@ -81,9 +81,23 @@ class AuthorRouter {
      *     tags:
      *     - Authors
      *     description: Delete a single author
+     *     operationId: updateUser
+     *     parameters:
+     *      - name: authorId
+     *        in: path
+     *        description: authorId that needs to be updated
+     *        required: true
+     *        schema:
+     *          type: string
+     *     requestBody:
+     *      description: update an author
+     *      content:
+     *        application/json:
+     *          schema:
+     *            $ref: '#/components/schemas/UpdateAuthorInput'
      *     responses:
      *       200:
-     *         description: Successful deleted author
+     *         description: Successful updated author
      */
     this.router.put("/authors/:id", authorController.apiUpdateAuthor);
   }
