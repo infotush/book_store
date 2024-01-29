@@ -7,6 +7,17 @@ class AuthorRouter {
     this.initializeRoutes();
   }
   private initializeRoutes(): void {
+    /**
+     * @openapi
+     * /v1/api/authors:
+     *  get:
+     *     tags:
+     *     - Authors
+     *     description: Responds if the app is up and running
+     *     responses:
+     *       200:
+     *         description: App is up and running
+     */
     this.router.get("/authors", authorController.apiGetAllAuthors);
     this.router.post("/authors", authorController.apiCreateAuthor);
     this.router.get("/authors/:id", authorController.apiGetAuthorById);
