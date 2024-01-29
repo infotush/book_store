@@ -1,23 +1,46 @@
-import mongoose, { Schema } from "mongoose";
+import { object, string, TypeOf, array } from "zod";
 
-export interface IAuthor {
-  fullName: string;
-  bio: string;
-  books: string[];
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
-}
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *      CreateAuthorInput:
+ *          type: object
+ *          required:
+ *              - fullName
+ *              - bio
+ *              - books
+ *          properties:
+ *              fullName:
+ *                  type: string
+ *                  default: John Doe
+ *              bio:
+ *                  type: string
+ *                  default: some bio
+ *              books:
+ *                  type: array
+ *                  default: ["Game of thrones"]
+ *                  items:
+ *                      type: string
+ *
+ *
+ *
+ */
 
-const author = new Schema<IAuthor>({
-  fullName: { type: String, required: true },
-  bio: { type: String, required: true },
-  books: { type: [String], required: true },
-  createdAt: { type: Date, default: null },
-  updatedAt: { type: Date, default: null },
-  deletedAt: { type: Date, default: null },
+const payload = {
+  body: object({
+    fullName: string({
+      required_error: "Full name is required",
+    }),
+    bio: string({
+      required_error: "bio is required",
+    }),
+    books: array(string()).nonempty({ message: "Books cannot be empty" }),
+  }),
+};
+
+export const createAuthorSchema = object({
+  ...payload,
 });
 
-const Author = mongoose.model("Author", author);
-
-export default Author;
+export type CreateAuthorInput = TypeOf<typeof createAuthorSchema>;

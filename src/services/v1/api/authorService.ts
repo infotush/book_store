@@ -1,4 +1,4 @@
-import Author, { IAuthor } from "../../../schemas/authorSchema";
+import Author, { IAuthor } from "../../../models/authorModel";
 
 class AuthorService {
   async getAuthors() {

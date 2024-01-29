@@ -12,6 +12,9 @@ class SwaggerJsDoc {
         openapi: "3.0.0",
         info: {
           title: "Online Book store application",
+          description: `This is a simple online book store application.
+           The application is designed to provide user an interface to search for books of different kinds such as ebooks,
+           printed books and audio books`,
           version,
         },
         components: {
@@ -29,7 +32,7 @@ class SwaggerJsDoc {
           },
         ],
       },
-      apis: ["./src/routes/**/*.ts"],
+      apis: ["./src/routes/**/*.ts", "./src/schemas/*.ts"],
     };
   }
 }

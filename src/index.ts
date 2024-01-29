@@ -29,7 +29,8 @@ class BookStoreApplication {
   private initializeDatabase() {
     mongoose
       .connect(`${process.env.DB_URL}`)
-      .then(() => this.logger.info("database is connected!"));
+      .then(() => this.logger.info("database is connected!"))
+      .catch((e) => this.logger.error(`Error connecting database ${e}`));
   }
 
   private initializeRouters() {
@@ -47,6 +48,7 @@ class BookStoreApplication {
   public start() {
     this.app.listen(this.port, () => {
       this.logger.info(`Server is running at http://localhost:${this.port}`);
+      this.logger.info(`Docs are available at ${this.port}/docs`);
     });
   }
 }
