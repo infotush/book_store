@@ -28,7 +28,7 @@ class AuthorRouter {
      *     description: Create a new author
      *     requestBody:
      *      description: create a new author
-     *      contents:
+     *      content:
      *        application/json:
      *          schema:
      *            $ref: '#/components/schemas/CreateAuthorInput'
