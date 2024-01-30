@@ -13,6 +13,7 @@ class AuthorRouter {
      *  get:
      *     tags:
      *     - Authors
+     *     summary: Get all authors
      *     description: Get all the authors details
      *     responses:
      *       200:
@@ -25,6 +26,7 @@ class AuthorRouter {
      *  post:
      *     tags:
      *     - Authors
+     *     summary: Create an author
      *     description: Create a new author
      *     requestBody:
      *      description: create a new author
@@ -64,7 +66,16 @@ class AuthorRouter {
      *  delete:
      *     tags:
      *     - Authors
+     *     summary: Delete author by ID
      *     description: Delete a single author
+     *     operationId: deleteAuthor
+     *     parameters:
+     *      - name: authorId
+     *        in: path
+     *        description: authorId that needs to be deleted
+     *        required: true
+     *        schema:
+     *          type: string
      *     responses:
      *       200:
      *         description: Successful deleted author
@@ -80,8 +91,9 @@ class AuthorRouter {
      *  put:
      *     tags:
      *     - Authors
-     *     description: Delete a single author
-     *     operationId: updateUser
+     *     summary: Update author by ID
+     *     description: Update an author by author ID
+     *     operationId: updateAuthor
      *     parameters:
      *      - name: authorId
      *        in: path
