@@ -21,7 +21,7 @@ class BookService {
       const book = await new Book(newBook).save();
       return book;
     } catch (e) {
-      throw new Error(`Author cannot be added ${e}`);
+      throw new Error(`Book cannot be added ${e}`);
     }
   }
 }
