@@ -1,5 +1,5 @@
 import { Router } from "express";
-import authorController from "../../../controllers/v1/api/authorController";
+import authorController from "../../../controllers/v1/api/authorsController";
 
 class AuthorRouter {
   public router: Router = Router();
