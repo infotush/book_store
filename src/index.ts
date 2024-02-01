@@ -7,6 +7,7 @@ import winston from "winston";
 import WinstonLogger from "./utils/logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./utils/swagger";
+import { eventSync } from './lib/eventSync';
 
 class BookStoreApplication {
   private app: Application;
@@ -46,9 +47,10 @@ class BookStoreApplication {
   }
 
   public start() {
-    this.app.listen(this.port, () => {
+    this.app.listen(this.port, async () => {
       this.logger.info(`Server is running at http://localhost:${this.port}`);
       this.logger.info(`Docs are available at ${this.port}/docs`);
+      await eventSync(this.logger)
     });
   }
 }
@@ -59,3 +61,4 @@ dotenv.config();
 const server = new BookStoreApplication();
 export const logger = new BookStoreApplication().logger;
 server.start();
+
