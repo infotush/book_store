@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-export interface IReviews {
+export interface IReview {
   bookId: Types.ObjectId;
   userId: Types.ObjectId;
   ratings: string;
@@ -10,9 +10,9 @@ export interface IReviews {
   deletedAt: Date;
 }
 
-const review = new Schema<IReviews>({
+const review = new Schema<IReview>({
   bookId: { type: Schema.Types.ObjectId, ref: "books", required: true },
-  userId: { type: Schema.Types.ObjectId, ref: "books", required: true },
+  userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
   ratings: { type: String, required: true },
   comments: { type: [String], required: true },
   createdAt: { type: Date, default: null },
@@ -20,6 +20,6 @@ const review = new Schema<IReviews>({
   deletedAt: { type: Date, default: null },
 });
 
-const Review = mongoose.model("Review", review);
+const Review = mongoose.model("Reviews", review);
 
 export default Review;

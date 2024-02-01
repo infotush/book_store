@@ -16,6 +16,6 @@ const user = new Schema<IUser>({
   deletedAt: { type: Date, default: null },
 });
 
-const User = mongoose.model("User", user);
+const User = mongoose.model("Users", user);
 
 export default User;

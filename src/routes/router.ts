@@ -2,6 +2,7 @@ import { Router } from "express";
 import authorRouter from "./v1/api/authorsRouter";
 import booksRouter from "./v1/api/booksRouter";
 import userRouter from "./v1/api/userRouter";
+import reviewsRouter from "./v1/api/reviewsRouter";
 
 class BookStoreRouter {
   public router: Router = Router();
@@ -9,6 +10,7 @@ class BookStoreRouter {
     this.initializeAuthorRouter();
     this.initializeBookRouter();
     this.initializeUserRouter();
+    this.initializeReviewRouter();
   }
   private initializeAuthorRouter(): void {
     this.router.use("/v1/api", authorRouter);
@@ -18,6 +20,9 @@ class BookStoreRouter {
   }
   private initializeUserRouter(): void {
     this.router.use("/v1/api", userRouter);
+  }
+  private initializeReviewRouter(): void {
+    this.router.use("/v1/api", reviewsRouter);
   }
 }
 
